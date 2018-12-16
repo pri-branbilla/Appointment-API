@@ -2,17 +2,6 @@ const admin = require('firebase-admin')
 const util = require('./util')
 const logger = require('./logger')
 
-function getUserData(uid){
-  admin.auth().getUser(uid)
-  .then(function(userRecord) {
-    // See the UserRecord reference doc for the contents of userRecord.
-    console.log("Successfully fetched user data:", userRecord.toJSON());
-  })
-  .catch(function(error) {
-    console.log("Error fetching user data:", error);
-  });
-}
-
 /**
  * Client Authentication.
  * Function called when the endpoint requires authentication to be used.
@@ -45,6 +34,5 @@ function verifyIdToken(req, res, idToken, callback) {
 }
 
 module.exports = {
-  getUserData,
   verifyAuth,
 }
