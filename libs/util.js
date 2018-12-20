@@ -26,7 +26,6 @@ const errors = {
     50004: 'Failed to Decrypt Resource',
 };
 
-
 function replaceErrors(value) {
     if (value instanceof Error) {
         let error = {};
@@ -97,5 +96,5 @@ module.exports = {
     errorResponse,
     logTransaction,
     mergeResponse,
-    successResponse
+    successResponse,
 };

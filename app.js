@@ -6,11 +6,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose')
 const mongologin = require('./config/mongodb.json')
-
-const appointmentsRouter = require('./routes/appointments');
+const cors = require('cors')
+const appointmentsRouter = require('./routes/appointments')
+const datesRouter = require('./routes/dates')
 
 const app = express();
-
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/appointments', appointmentsRouter);
+app.use('/dates', datesRouter);
 
 function init() {
   mongoose.connect(

@@ -1,4 +1,4 @@
-const appointmentCtrl = require('../controllers/appointment')
+const dateCtrl = require('../controllers/dates')
 const util = require('../libs/util')
 
 var express = require('express');
@@ -6,7 +6,7 @@ var router = express.Router({mergeParams: true});
 
 
 router.get('/', function(req, res) {
-  appointmentCtrl.getAppointments(req, res, function (error, data) {
+  dateCtrl.getAvailableDates(function (error, data) {
     if (error) {
       util.errorResponse(req, res, error.type, error);
     } else {
@@ -17,8 +17,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res){
-  const info = req.body
-  appointmentCtrl.postAppointment(info, (err, data) => {
+  dateCtrl.postNewDate(req, res, (err, data) => {
     if (err) {
       util.errorResponse(req, res, err.type, err);
     } else {
@@ -26,5 +25,16 @@ router.post('/', function(req, res){
     }
   })
 })
+
+router.patch('/update', function(req, res){
+    const info = req.body.date
+    dateCtrl.updateDate(info, (err, data) => {
+      if (err) {
+        util.errorResponse(req, res, err.type, err);
+      } else {
+        util.successResponse(res, 204, data);
+      }
+    })
+  })
 
 module.exports = router;

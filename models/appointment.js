@@ -19,9 +19,7 @@ function newAppointment(info, callback) {
 }
 
 function listAppointments(callback) {
-    Appointment.find({})
-        .lean()
-        .distinct('id', callback);
+    Appointment.find({}, callback)
 }
 
 module.exports = {
