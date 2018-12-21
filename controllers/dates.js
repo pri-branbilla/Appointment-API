@@ -4,6 +4,13 @@ const utils = require('../libs/util')
 
 function postNewDate(req, res, callback) {
     middleware.verifyAuth(req, res, (response) => {
+        if (req.body.startDate === 'Invalid date') {
+            error = {
+                type: 42200,
+                message: "Invalid start date"
+            }
+            return callback(error)
+        }
         const datesArray = utils.getNewDates(
             req.body.startDate,
             req.body.finalDate,
@@ -15,7 +22,6 @@ function postNewDate(req, res, callback) {
         console.log(req.body)
         dateModel.newDate(datesArray, (err, data) => {
             if (err) {
-                // console.log(err)
                 err.type = 50002;
                 callback(err);
             } else {

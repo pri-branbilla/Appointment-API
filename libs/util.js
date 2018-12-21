@@ -30,6 +30,12 @@ const errors = {
 function getNewDates(startDate, finalDate, startHour, finishHour, daysStep, step){
     let dates = []
     let iterDate = startDate
+    if (!finalDate) {
+        finalDate = startDate
+    }
+    if (!finishHour) {
+        finishHour = startHour
+    }
     while (moment(iterDate) <= moment(finalDate)) {
         let iterDateTime = iterDate + "T" + startHour
         let finalDateTime = iterDate + "T" + finishHour
@@ -39,7 +45,13 @@ function getNewDates(startDate, finalDate, startHour, finishHour, daysStep, step
             dates.push({
                 schDate: iterDateTime
             })
+            if (!step) {
+                break
+            }
             iterDateTime = moment(iterDateTime).add(step, 'minutes')
+        }
+        if (!daysStep) {
+            break
         }
         iterDate = moment(iterDate).add(daysStep, 'days').format("YYYY-MM-DD")
     }
