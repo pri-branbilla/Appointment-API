@@ -30,3 +30,25 @@ This project uses mongodb to database. Create your account in [MLab](https://mla
 First of all, run `npm install` to install the dependencies.
 
 After that, just run `npm start` and start using the API!
+
+# Routes
+
+### Appointments:
+
+`POST /appointments`
+Create a new appointment.
+
+`GET /appointments`
+Get all the scheduled appointments.
+
+### Dates:
+
+`POST /dates`
+Create a new available date.
+
+`GET /dates`
+Get all the available dates.
+
+`PATCH /dates/update`
+Update one available date to scheduled. It won't appear with GET request anymore.
+
