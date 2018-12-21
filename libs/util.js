@@ -3,6 +3,7 @@
 const stringify = require('json-stringify-safe');
 const util      = require('util');
 const logger  = require('./logger');
+const moment = require('moment')
 
 const fieldsToLog = ['body', 'headers', 'hostname', 'ip', 'ips', 'method', 'originalUrl', 'params', 'query', 'transaction_id'];
 
@@ -25,6 +26,25 @@ const errors = {
     50003: 'Failed to Encrypt Resource',
     50004: 'Failed to Decrypt Resource',
 };
+
+function getNewDates(startDate, finalDate, startHour, finishHour, daysStep, step){
+    let dates = []
+    let iterDate = startDate
+    while (moment(iterDate) <= moment(finalDate)) {
+        let iterDateTime = iterDate + "T" + startHour
+        let finalDateTime = iterDate + "T" + finishHour
+        console.log(iterDate)
+        console.log(iterDateTime)
+        while(moment(iterDateTime) <= moment(finalDateTime)) {
+            dates.push({
+                schDate: iterDateTime
+            })
+            iterDateTime = moment(iterDateTime).add(step, 'minutes')
+        }
+        iterDate = moment(iterDate).add(daysStep, 'days').format("YYYY-MM-DD")
+    }
+    return dates
+}
 
 function replaceErrors(value) {
     if (value instanceof Error) {
@@ -97,4 +117,5 @@ module.exports = {
     logTransaction,
     mergeResponse,
     successResponse,
+    getNewDates,
 };

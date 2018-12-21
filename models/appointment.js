@@ -19,7 +19,12 @@ function newAppointment(info, callback) {
 }
 
 function listAppointments(callback) {
-    Appointment.find({}, callback)
+    Appointment.find(
+        {},
+        null,
+        {sort: {date: 'asc'}},
+        callback,
+    )
 }
 
 module.exports = {
