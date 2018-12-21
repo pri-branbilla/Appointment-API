@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const moment = require('moment')
 
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
@@ -20,7 +21,7 @@ function newAppointment(info, callback) {
 
 function listAppointments(callback) {
     Appointment.find(
-        {},
+        {date: {$gt: moment.now()}},
         null,
         {sort: {date: 'asc'}},
         callback,
