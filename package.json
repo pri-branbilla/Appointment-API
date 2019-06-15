@@ -16,8 +16,5 @@
     "mongoose": "5.3.16",
     "morgan": "1.9.1",
     "winston": "3.1.0"
-  },
-  "devDependencies": {
-    "eslint": "5.10.0"
   }
 }
