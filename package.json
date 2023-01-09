@@ -10,7 +10,7 @@
     "cors": "2.8.5",
     "debug": "2.6.9",
     "express": "4.16.4",
-    "firebase-admin": "6.4.0",
+    "firebase-admin": "11.4.1",
     "http-errors": "1.6.2",
     "moment": "2.23.0",
     "mongoose": "5.7.5",
